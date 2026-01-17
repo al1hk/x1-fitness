@@ -58,29 +58,17 @@ const Hero: React.FC = () => {
       {/* 3. Mid-Layer: The Main Headline */}
       <motion.div 
         style={{ y: textY, opacity }}
-        className="relative z-20 w-full flex flex-col items-center pointer-events-none select-none px-4 -mt-[15vh] md:-mt-[20vh]"
+        className="absolute top-[8%] md:top-[14%] w-full flex flex-col items-center z-10 pointer-events-auto select-none px-4 will-change-transform"
       >
-        <h1 className="font-display font-bold uppercase text-[18vw] md:text-[14vw] lg:text-[12vw] leading-[0.85] tracking-tight text-center w-full flex flex-col items-center">
-          <div className="flex justify-center flex-wrap drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
-            {"REDEFINE".split("").map((char, i) => (
-              <span 
-                key={i} 
-                className="inline-block bg-clip-text text-transparent [background-image:linear-gradient(to_top,#000000_0%,#ffffff_22%,#ffffff_78%,#d4d4d8_100%)]"
-                style={{ backgroundSize: '100% 160%', backgroundPosition: 'center bottom' }}
-              >
-                {char}
-              </span>
-            ))}
-          </div>
-          <span className="block bg-clip-text text-transparent bg-gradient-to-b from-red-500 via-brand-red to-red-900 relative pb-[0.14em]" style={{ filter: 'drop-shadow(0 0 25px rgba(230,0,0,0.4))' }}>
-            YOUR LIMITS
+        <h1 className="font-display font-bold uppercase text-[18vw] md:text-[15vw] leading-[0.85] tracking-tighter text-center cursor-default w-full">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-2xl">
+            Redefine
+          </span>
+          <span className="block text-brand-red drop-shadow-[0_0_30px_rgba(230,0,0,0.6)]">
+            Your Limits
           </span>
         </h1>
-        <p className="font-sans font-bold text-[8px] md:text-xs lg:text-sm tracking-[0.4em] md:tracking-[0.6em] text-white/40 uppercase mt-4 md:mt-8">
-            The Ultimate Performance Collective
-        </p>
       </motion.div>
-
       {/* 4. Foreground Layer: Character Image */}
       <motion.div 
         style={{ y: imageY }}
@@ -108,7 +96,7 @@ const Hero: React.FC = () => {
         className="absolute inset-0 z-40 w-full h-full max-w-[1600px] mx-auto pointer-events-none"
       >
         {/* TOP LEFT */}
-        <div className="absolute top-[15%] left-2 md:left-[8%] lg:left-[12%] animate-float-slow will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-left">
+        <div className="absolute top-[25%] left-2 md:left-[8%] lg:left-[12%] animate-float-slow will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-left">
             <FloatingCard 
                 icon={<Clock className="w-5 h-5" />} 
                 label="Accessibility" 
@@ -126,7 +114,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* TOP RIGHT */}
-        <div className="absolute top-[15%] right-2 md:right-[8%] lg:right-[12%] animate-float-reverse will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-right">
+        <div className="absolute top-[25%] right-2 md:right-[8%] lg:right-[12%] animate-float-reverse will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-right">
             <FloatingCard 
                 icon={<Activity className="w-5 h-5" />} 
                 label="Intensity" 

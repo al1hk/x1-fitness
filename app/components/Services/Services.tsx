@@ -3,11 +3,34 @@
 import React, { useState } from 'react';
 import ContactFooter from '../ContactFooter';
 import ServicesSection from '../ServicesSection';
-import { Plus, Minus, Search, Crosshair, BarChart2, Flag } from 'lucide-react';
+import { 
+  Plus, 
+  Minus, 
+  Search, 
+  Crosshair, 
+  BarChart2, 
+  Flag, 
+  Shield, 
+  Zap, 
+  Activity, 
+  Target 
+} from 'lucide-react';
 
 const Services: React.FC = () => {
     // FAQ State
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+     const protocolSteps = [
+        { icon: Search, title: "Intel Gathering", desc: "Comprehensive biometric screening and mobility assessment to identify mechanical weaknesses." },
+        { icon: Crosshair, title: "Strategic Planning", desc: "Developing a custom periodization plan tailored to your specific physical objectives." },
+        { icon: Flag, title: "Deployment", desc: "High-intensity execution under expert supervision. We push you to the breaking point and back." },
+        { icon: BarChart2, title: "After Action Report", desc: "Granular data analysis and progress tracking to refine the strategy for the next cycle." },
+        { icon: Shield, title: "Tactical Refinement", desc: "Fine-tuning movement patterns and technical execution based on initial field performance." },
+        { icon: Zap, title: "Resilience Protocol", desc: "Advanced recovery techniques and bio-hacking to ensure constant operational readiness." },
+        { icon: Activity, title: "Simulated Stress", desc: "Testing physical and mental capacity under high-load environmental conditions and chaos." },
+        { icon: Target, title: "Mission Mastery", desc: "Final evaluation of key performance indicators and transition into elite-tier operations." }
+    ];
+
 
   return (
     <div className="pt-20 min-h-screen bg-brand-dark overflow-hidden">
@@ -36,29 +59,28 @@ const Services: React.FC = () => {
         <ServicesSection variant="services" />
       </div>
 
-      {/* 3. The Protocol (Replaced Plans Section) */}
-      <div className="py-32 px-6 relative bg-[#050505] overflow-hidden">
+    <div className="py-32 px-6 relative bg-[#050505] overflow-hidden">
          {/* Background Map Effect */}
          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-         <div className="absolute top-1/2 left-0 w-full h-[1px] bg-brand-red/20 hidden md:block"></div>
+         
+         {/* Horizontal Divider Lines for Grid Rows */}
+         <div className="absolute top-[38%] left-0 w-full h-[1px] bg-brand-red/10 hidden lg:block"></div>
          
          <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-24">
                 <span className="text-brand-red font-bold tracking-[0.2em] uppercase text-sm">Methodology</span>
-                <h2 className="text-5xl font-display font-bold text-white uppercase mt-2">The <span className="text-transparent stroke-white" style={{ WebkitTextStroke: '1px white' }}>Protocol</span></h2>
+                <h2 className="text-5xl font-display font-bold text-white uppercase mt-2">
+                    The <span className="stroke-white">Protocol</span>
+                </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
-                {[
-                    { icon: Search, title: "Intel Gathering", desc: "Comprehensive biometric screening and mobility assessment to identify weaknesses." },
-                    { icon: Crosshair, title: "Strategic Planning", desc: "Developing a custom periodization plan tailored to your specific objectives." },
-                    { icon: Flag, title: "Deployment", desc: "High-intensity execution under expert supervision. We push you to the breaking point and back." },
-                    { icon: BarChart2, title: "After Action Report", desc: "Data analysis and progress tracking to refine the strategy for the next cycle." }
-                ].map((step, i) => (
+            {/* Grid Layout: 1 col on mobile, 2 on tablet, 4 on desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-24 relative">
+                {protocolSteps.map((step, i) => (
                     <div key={i} className="relative group">
                         {/* Step Number Background */}
-                        <div className="absolute -top-10 -left-4 text-[120px] font-display font-bold text-white/5 z-0 leading-none select-none group-hover:text-brand-red/10 transition-colors">
-                            0{i+1}
+                        <div className="absolute -top-12 -left-4 text-[100px] lg:text-[120px] font-display font-bold text-white/5 z-0 leading-none select-none group-hover:text-brand-red/10 transition-colors">
+                            {i < 9 ? `0${i+1}` : i+1}
                         </div>
                         
                         {/* Content */}
@@ -66,21 +88,28 @@ const Services: React.FC = () => {
                             <div className="w-16 h-16 bg-[#111] border border-brand-red/30 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:scale-110 transition-all duration-300 shadow-[0_0_20px_rgba(230,0,0,0.2)]">
                                 <step.icon className="w-8 h-8 text-white group-hover:text-black transition-colors" />
                             </div>
-                            <h3 className="text-2xl font-display font-bold text-white uppercase mb-4">{step.title}</h3>
+                            <h3 className="text-xl lg:text-2xl font-display font-bold text-white uppercase mb-4 tracking-tight group-hover:text-brand-red transition-colors">
+                                {step.title}
+                            </h3>
                             <p className="text-gray-400 leading-relaxed font-medium text-sm">
                                 {step.desc}
                             </p>
                         </div>
                         
-                        {/* Connector Line (Mobile Hidden) */}
-                        {i < 3 && (
-                            <div className="hidden md:block absolute top-[85px] -right-[60px] w-[100px] h-[2px] bg-gradient-to-r from-brand-red/50 to-transparent z-0"></div>
+                        {/* Connector Line (Desktop 4-col logic: don't show on last item of row) */}
+                        {((i + 1) % 4 !== 0) && (
+                            <div className="hidden lg:block absolute top-[85px] -right-[60px] w-[100px] h-[1px] bg-gradient-to-r from-brand-red/40 to-transparent z-0"></div>
+                        )}
+                        {/* Connector Line (Tablet 2-col logic) */}
+                        {((i + 1) % 2 !== 0) && (
+                            <div className="hidden sm:block lg:hidden absolute top-[85px] -right-[30px] w-[60px] h-[1px] bg-gradient-to-r from-brand-red/40 to-transparent z-0"></div>
                         )}
                     </div>
                 ))}
             </div>
          </div>
       </div>
+
 
       {/* 4. FAQ Section */}
       <div className="max-w-4xl mx-auto px-6 pb-32 pt-12">

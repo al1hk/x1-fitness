@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Josefin_Sans, Oswald } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "./components/CustomCursor";
+import DynamicBackground from "./components/DynamicBackground";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,7 +38,12 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${inter.variable} ${oswald.variable} ${josefinSans.variable} bg-brand-dark text-white antialiased`}
       >
-        {children}
+        <CustomCursor />
+        <div className="bg-brand-dark min-h-screen w-full relative selection:bg-brand-red selection:text-white scroll-smooth">
+          <DynamicBackground />
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import Link from './Link';
+import Link from 'next/link';
 import logo from '../../assets/logo.png';
 
 const Navbar: React.FC = () => {

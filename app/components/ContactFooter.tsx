@@ -3,7 +3,7 @@ import React from 'react';
 import { Facebook, Instagram, AtSign } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import tiktokIcon from '../../assets/tiktok-svgrepo-com.svg';
-import Link from './Link';
+import Link from 'next/link';
 
 const ContactFooter: React.FC = () => {
   return (
