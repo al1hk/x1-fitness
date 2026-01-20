@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
   return (
     <section 
       ref={ref} 
-      className="relative w-full h-[100svh] overflow-hidden flex flex-col items-center justify-center bg-brand-dark isolate"
+      className="relative w-full h-[100svh] overflow-visible flex flex-col items-center justify-center bg-brand-dark isolate"
     >
       
       {/* 1. Background Layer: Marquee Text */}
@@ -72,7 +72,7 @@ const Hero: React.FC = () => {
       {/* 4. Foreground Layer: Character Image */}
       <motion.div 
         style={{ y: imageY }}
-        className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
+        className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform"
       >
         <img 
           src={heroImage.src}
@@ -93,42 +93,55 @@ const Hero: React.FC = () => {
       {/* 5. UI Layer: Floating Info Cards - Optimized for Mobile Overlap */}
       <motion.div 
         style={{ y: imageY }}
-        className="absolute inset-0 z-40 w-full h-full max-w-[1600px] mx-auto pointer-events-none"
+        className="absolute inset-0 z-50 w-full h-full max-w-[1600px] mx-auto pointer-events-none isolate"
       >
-        {/* TOP LEFT */}
-        <div className="absolute top-[25%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[8%] lg:left-[12%] animate-float-slow will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-left">
-            <FloatingCard 
-                icon={<Clock className="w-5 h-5" />} 
-                label="Accessibility" 
-                value="OPEN 24/7" 
-            />
-        </div>
+        <div
+          className="relative w-full h-full"
+          style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+        >
+          {/* TOP LEFT */}
+          <div className="absolute top-[25%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[8%] lg:left-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left">
+            <div className="animate-float-slow will-change-transform">
+              <FloatingCard 
+                  icon={<Clock className="w-5 h-5" />} 
+                  label="Accessibility" 
+                  value="OPEN 24/7" 
+              />
+            </div>
+          </div>
 
-        {/* BOTTOM LEFT - Pushed further left/bottom to avoid character */}
-        <div className="absolute bottom-[30%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[5%] lg:left-[10%] animate-float-delayed will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-left">
-            <FloatingCard 
-                icon={<Flame className="w-5 h-5" />} 
-                label="Avg Session" 
-                value="950 KCAL" 
-            />
-        </div>
+          {/* BOTTOM LEFT - Pushed further left/bottom to avoid character */}
+          <div className="absolute bottom-[30%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[5%] lg:left-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left">
+            <div className="animate-float-delayed will-change-transform">
+              <FloatingCard 
+                  icon={<Flame className="w-5 h-5" />} 
+                  label="Avg Session" 
+                  value="950 KCAL" 
+              />
+            </div>
+          </div>
 
-        {/* TOP RIGHT */}
-        <div className="absolute top-[25%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[8%] lg:right-[12%] animate-float-reverse will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-right">
-            <FloatingCard 
-                icon={<Activity className="w-5 h-5" />} 
-                label="Intensity" 
-                value="ELITE" 
-            />
-        </div>
+          {/* TOP RIGHT */}
+          <div className="absolute top-[25%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[8%] lg:right-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right">
+            <div className="animate-float-reverse will-change-transform">
+              <FloatingCard 
+                  icon={<Activity className="w-5 h-5" />} 
+                  label="Intensity" 
+                  value="ELITE" 
+              />
+            </div>
+          </div>
 
-        {/* BOTTOM RIGHT - Pushed further right/bottom to avoid character */}
-        <div className="absolute bottom-[30%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[5%] lg:right-[10%] animate-float-slow will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-right">
-            <FloatingCard 
-                icon={<Dumbbell className="w-5 h-5" />} 
-                label="Equipment" 
-                value="HAMMER STRENGTH" 
-            />
+          {/* BOTTOM RIGHT - Pushed further right/bottom to avoid character */}
+          <div className="absolute bottom-[30%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[5%] lg:right-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right">
+            <div className="animate-float-slow will-change-transform">
+              <FloatingCard 
+                  icon={<Dumbbell className="w-5 h-5" />} 
+                  label="Equipment" 
+                  value="HAMMER STRENGTH" 
+              />
+            </div>
+          </div>
         </div>
       </motion.div>
 
