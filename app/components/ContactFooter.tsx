@@ -99,6 +99,8 @@ const ContactFooter: React.FC = () => {
                         <a
                             key={name}
                             href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-white text-black p-3 rounded-lg hover:bg-brand-red hover:text-white transition-all duration-300 hover:-translate-y-1"
                             title={name}
                             aria-label={name}
