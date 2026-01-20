@@ -19,32 +19,34 @@ const Hero: React.FC = () => {
   const marqueeY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-
   return (
     <section 
       ref={ref} 
-      className="relative w-full h-[100svh] overflow-visible flex flex-col items-center justify-center bg-brand-dark isolate"
+      className="relative w-full h-[100svh] overflow-hidden flex flex-col items-center justify-center bg-brand-dark isolate"
     >
       
       {/* 1. Background Layer: Marquee Text */}
       <motion.div 
         style={{ y: marqueeY }}
-        className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 select-none overflow-hidden"
+        className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 select-none"
       >
-        <div className="absolute w-full rotate-[-8deg] scale-[1.3] md:scale-150 transform-gpu">
-            <div className="flex whitespace-nowrap animate-marquee-slow will-change-transform">
-                {[1, 2].map((i) => (
-                    <span key={i} className="text-[20vw] font-display font-black uppercase italic text-outline-red px-8 md:px-12 leading-none">
-                        Titan • Strength • Power • Legacy •
-                    </span>
-                ))}
-            </div>
-            <div className="flex whitespace-nowrap animate-marquee-reverse-slow -mt-4 md:-mt-8 will-change-transform">
-                {[1, 2].map((i) => (
-                    <span key={i} className="text-[20vw] font-display font-black uppercase italic text-stroke-white px-8 md:px-12 leading-none">
-                        Relentless • Grit • Obsession •
-                    </span>
-                ))}
+        {/* Added wrapper with overflow-hidden to limit GPU layer size on iOS */}
+        <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
+            <div className="absolute w-full rotate-[-8deg] scale-[1.3] md:scale-150 transform-gpu">
+                <div className="flex whitespace-nowrap animate-marquee-slow will-change-transform">
+                    {[1, 2].map((i) => (
+                        <span key={i} className="text-[20vw] font-display font-black uppercase italic text-outline-red px-8 md:px-12 leading-none">
+                            Titan • Strength • Power • Legacy •
+                        </span>
+                    ))}
+                </div>
+                <div className="flex whitespace-nowrap animate-marquee-reverse-slow -mt-4 md:-mt-8 will-change-transform">
+                    {[1, 2].map((i) => (
+                        <span key={i} className="text-[20vw] font-display font-black uppercase italic text-stroke-white px-8 md:px-12 leading-none">
+                            Relentless • Grit • Obsession •
+                        </span>
+                    ))}
+                </div>
             </div>
         </div>
       </motion.div>
@@ -69,6 +71,7 @@ const Hero: React.FC = () => {
           </span>
         </h1>
       </motion.div>
+
       {/* 4. Foreground Layer: Character Image */}
       <motion.div 
         style={{ y: imageY }}
@@ -90,18 +93,27 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-brand-red/5 mix-blend-color pointer-events-none"></div>
       </motion.div>
 
-      {/* 5. UI Layer: Floating Info Cards - Optimized for Mobile Overlap */}
+      {/* 5. UI Layer: Floating Info Cards */}
       <motion.div 
         style={{ y: imageY }}
         className="absolute inset-0 z-50 w-full h-full max-w-[1600px] mx-auto pointer-events-none isolate"
       >
         <div
           className="relative w-full h-full"
-          style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+          style={{ 
+            // Force hardware acceleration container
+            transform: 'translate3d(0,0,0)', 
+            WebkitTransform: 'translate3d(0,0,0)' 
+          }}
         >
           {/* TOP LEFT */}
-          <div className="absolute top-[25%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[8%] lg:left-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left">
-            <div className="animate-float-slow will-change-transform">
+          <div 
+            className="absolute top-[25%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[8%] lg:left-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left"
+          >
+            <div 
+                className="animate-float-slow" 
+                style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+            >
               <FloatingCard 
                   icon={<Clock className="w-5 h-5" />} 
                   label="Accessibility" 
@@ -110,9 +122,14 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* BOTTOM LEFT - Pushed further left/bottom to avoid character */}
-          <div className="absolute bottom-[30%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[5%] lg:left-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left">
-            <div className="animate-float-delayed will-change-transform">
+          {/* BOTTOM LEFT */}
+          <div 
+            className="absolute bottom-[30%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[5%] lg:left-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left"
+          >
+            <div 
+                className="animate-float-delayed"
+                style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+            >
               <FloatingCard 
                   icon={<Flame className="w-5 h-5" />} 
                   label="Avg Session" 
@@ -122,8 +139,13 @@ const Hero: React.FC = () => {
           </div>
 
           {/* TOP RIGHT */}
-          <div className="absolute top-[25%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[8%] lg:right-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right">
-            <div className="animate-float-reverse will-change-transform">
+          <div 
+            className="absolute top-[25%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[8%] lg:right-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right"
+          >
+            <div 
+                className="animate-float-reverse"
+                style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+            >
               <FloatingCard 
                   icon={<Activity className="w-5 h-5" />} 
                   label="Intensity" 
@@ -132,9 +154,14 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* BOTTOM RIGHT - Pushed further right/bottom to avoid character */}
-          <div className="absolute bottom-[30%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[5%] lg:right-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right">
-            <div className="animate-float-slow will-change-transform">
+          {/* BOTTOM RIGHT */}
+          <div 
+            className="absolute bottom-[30%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[5%] lg:right-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right"
+          >
+            <div 
+                className="animate-float-slow"
+                style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
+            >
               <FloatingCard 
                   icon={<Dumbbell className="w-5 h-5" />} 
                   label="Equipment" 
