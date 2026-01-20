@@ -121,7 +121,7 @@ const Contact: React.FC = () => {
                             { icon: MapPin, label: "Location", val: "First Floor, KJS Business Complex, Block 10-A, Gulshan e Iqbal, Main Rashid minhas road, Karachi." },
                             { icon: Phone, label: "Phone", val: "+92 310 6568333" },
                             { icon: Mail, label: "Email", val: "hello@x1fitness.com" },
-                            { icon: Clock, label: "Hours", val: "Mon-Sun: 7am - 12am" },
+                            { icon: Clock, label: "Hours", val: "Mon-Sat: 7am - 12am" },
                         ].map((item, i) => (
                             <div key={i} className="group">
                                 <div className="flex items-center gap-3 mb-2">

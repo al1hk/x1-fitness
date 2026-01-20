@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import { Dumbbell, Users, Laptop, Trophy, ArrowUpRight } from 'lucide-react';
 import Image from './Image';
 
@@ -37,22 +39,29 @@ const services = [
   }
 ];
 
-const ServiceCard: React.FC<{ service: typeof services[0] }> = ({ service }) => {
+const ServiceCard: React.FC<{
+  service: typeof services[0];
+  isActive: boolean;
+  onToggle: () => void;
+}> = ({ service, isActive, onToggle }) => {
   return (
-    <div className="group relative h-[450px] rounded-xl overflow-hidden cursor-pointer bg-[#0a0a0a] border border-white/5 hover:border-brand-red/50 transition-colors duration-500">
+    <div
+      onClick={onToggle}
+      className={`group relative h-[450px] rounded-xl overflow-hidden cursor-pointer bg-[#0a0a0a] border border-white/5 hover:border-brand-red/50 transition-all duration-500 active:scale-[0.99] ${isActive ? 'border-brand-red/50 shadow-[0_0_0_1px_rgba(230,0,0,0.25)]' : ''}`}
+    >
         
         {/* --- IMAGE LAYER WITH RED GRADING --- */}
         <div className="absolute inset-0 overflow-hidden">
             <Image 
                 src={service.image} 
                 alt={service.title} 
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale brightness-75 contrast-125"
+                className={`w-full h-full object-cover transition-transform duration-700 ease-out filter grayscale brightness-75 contrast-125 ${isActive ? 'scale-105' : 'group-hover:scale-105 group-active:scale-105'}`}
                 loading="lazy"
                 decoding="async"
                 width="600"
                 height="450"
             />
-            <div className="absolute inset-0 bg-brand-red mix-blend-multiply opacity-0 group-hover:opacity-30 transition-opacity duration-500 ease-out" />
+            <div className={`absolute inset-0 bg-brand-red mix-blend-multiply transition-opacity duration-500 ease-out ${isActive ? 'opacity-30' : 'opacity-0 group-hover:opacity-30 group-active:opacity-30'}`} />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
         </div>
 
@@ -64,18 +73,18 @@ const ServiceCard: React.FC<{ service: typeof services[0] }> = ({ service }) => 
             </div>
 
             {/* Text Content */}
-            <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+            <div className={`transform transition-transform duration-500 ease-out ${isActive ? 'translate-y-0' : 'md:translate-y-2 md:group-hover:translate-y-0'}`}>
                 <div className="flex items-center gap-2 mb-3">
                     <h3 className="text-3xl font-display font-bold uppercase text-white tracking-wide">
                         {service.title}
                     </h3>
                 </div>
                 
-                <p className="text-gray-400 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75 leading-relaxed font-normal">
+                <p className={`text-gray-400 text-sm mb-6 transition-opacity duration-500 delay-75 leading-relaxed font-normal ${isActive ? 'opacity-100' : 'opacity-0 md:opacity-0 md:group-hover:opacity-100'}`}>
                     {service.description}
                 </p>
 
-                <div className="flex items-center justify-between border-t border-white/10 pt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                <div className={`flex items-center justify-between border-t border-white/10 pt-4 transition-opacity duration-500 delay-100 ${isActive ? 'opacity-100' : 'opacity-0 md:opacity-0 md:group-hover:opacity-100'}`}>
                      <span className="text-brand-red font-bold uppercase tracking-wider text-xs">
                         {service.price}
                      </span>
@@ -87,9 +96,12 @@ const ServiceCard: React.FC<{ service: typeof services[0] }> = ({ service }) => 
   );
 };
 
-const ServiceRow: React.FC<{ service: typeof services[0] }> = ({ service }) => {
+const ServiceRow: React.FC<{ service: typeof services[0]; showEngage?: boolean }> = ({
+  service,
+  showEngage = true,
+}) => {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 hover:border-brand-red/50 transition-colors">
+    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 hover:border-brand-red/50 transition-colors cursor-pointer active:bg-white/5 active:scale-[0.995] transition-transform">
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(230,0,0,0.18),transparent_55%)]"></div>
       </div>
@@ -126,9 +138,11 @@ const ServiceRow: React.FC<{ service: typeof services[0] }> = ({ service }) => {
           </div>
 
           <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
-            <span className="text-white/50 text-xs uppercase tracking-[0.2em] font-bold">
-              Engage
-            </span>
+            {showEngage && (
+              <span className="text-white/50 text-xs uppercase tracking-[0.2em] font-bold">
+                Engage
+              </span>
+            )}
             <ArrowUpRight className="w-5 h-5 text-brand-red" />
           </div>
         </div>
@@ -143,6 +157,7 @@ type ServicesSectionProps = {
 
 const ServicesSection: React.FC<ServicesSectionProps> = ({ variant = 'landing' }) => {
   const isServicesVariant = variant === 'services';
+  const [activeServiceId, setActiveServiceId] = useState<number | null>(null);
 
   return (
     <section
@@ -222,13 +237,20 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ variant = 'landing' }
         {isServicesVariant ? (
           <div className="space-y-6">
             {services.map((service) => (
-              <ServiceRow key={service.id} service={service} />
+              <ServiceRow key={service.id} service={service} showEngage={false} />
             ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard
+                key={service.id}
+                service={service}
+                isActive={activeServiceId === service.id}
+                onToggle={() =>
+                  setActiveServiceId((prev) => (prev === service.id ? null : service.id))
+                }
+              />
             ))}
           </div>
         )}

@@ -65,12 +65,11 @@ const ContactFooter: React.FC = () => {
                         <img
                             src={logo.src}
                             alt="X1 Fitness"
-                            className="w-9 h-9 object-contain"
+                            className="w-24 h-24 object-contain"
                             loading="eager"
                             decoding="async"
                         />
-                        <div className="absolute inset-0 bg-brand-red blur-lg opacity-40"></div>
-                    </div>
+                                            </div>
                     <span className="text-2xl font-display font-bold tracking-wide italic">
                     <span className="text-brand-red">X1</span>
                     <span className="text-white">Fitness</span>
@@ -88,12 +87,12 @@ const ContactFooter: React.FC = () => {
                 {/* Social Icons - Updated to Instagram, Threads (AtSign), Facebook, TikTok */}
                 <div className="flex gap-6 mb-8">
                     {[
-                        { name: 'Instagram', href: '#', icon: <Instagram className="w-6 h-6" /> },
-                        { name: 'Threads', href: '#', icon: <AtSign className="w-6 h-6" /> },
-                        { name: 'Facebook', href: '#', icon: <Facebook className="w-6 h-6" /> },
+                        { name: 'Instagram', href: 'https://www.instagram.com/x1fitness.pk/', icon: <Instagram className="w-6 h-6" /> },
+                        { name: 'Threads', href: 'https://www.threads.com/@x1fitness.pk', icon: <AtSign className="w-6 h-6" /> },
+                        { name: 'Facebook', href: 'https://www.facebook.com/x1fitness.pk/', icon: <Facebook className="w-6 h-6" /> },
                         {
                             name: 'TikTok',
-                            href: '#',
+                            href: 'https://www.tiktok.com/@x1fitness.pk',
                             icon: <img src={(tiktokIcon as unknown as { src?: string }).src ?? (tiktokIcon as unknown as string)} alt="" className="w-6 h-6" />
                         }
                     ].map(({ name, href, icon }) => (
@@ -132,7 +131,7 @@ const ContactFooter: React.FC = () => {
                 
                 <div className="font-sans space-y-4 text-sm font-medium">
                     <div className="flex flex-col md:items-end">
-                        <span className="text-gray-500 mb-1 uppercase text-xs tracking-wider">Monday-Sunday</span>
+                        <span className="text-gray-500 mb-1 uppercase text-xs tracking-wider">Monday-Saturday</span>
                         <span className="text-white">7:00 AM - 12:00 AM</span>
                     </div>
                     

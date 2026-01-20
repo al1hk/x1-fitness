@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import { Leaf, Users, UserCheck, Layout, Zap, Activity } from 'lucide-react';
 import Image from './Image';
 
@@ -12,6 +14,7 @@ const features = [
 ];
 
 const FeaturesSection: React.FC = () => {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
   return (
     <section id="about" className="relative w-full py-24 md:py-32 bg-[#050505] overflow-hidden">
       
@@ -65,21 +68,21 @@ const FeaturesSection: React.FC = () => {
                     {features.map((feature, index) => (
                         <div 
                             key={index}
-                            className="group relative p-10 border-b border-r border-white/5 transition-all duration-300 overflow-hidden"
-                        >
+                            onClick={() => setActiveCard(activeCard === index ? null : index)}
+                            className={`group relative p-10 border-b border-r border-white/5 transition-all duration-300 overflow-hidden cursor-pointer ${activeCard === index ? 'bg-white/5' : 'active:bg-white/5'}`}>
                             {/* Hover Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#330000] via-[#1a0000] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out z-0" />
+                            <div className={`absolute inset-0 bg-gradient-to-br from-[#330000] via-[#1a0000] to-transparent transition-opacity duration-300 ease-out z-0 ${activeCard === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-active:opacity-100'}`} />
                             
                             {/* Red Glow */}
-                             <div className="absolute -top-20 -left-20 w-40 h-40 bg-[radial-gradient(circle,rgba(230,0,0,0.4)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 pointer-events-none"></div>
+                            <div className={`absolute -top-20 -left-20 w-40 h-40 bg-[radial-gradient(circle,rgba(230,0,0,0.4)_0%,transparent_70%)] transition-opacity duration-300 z-0 pointer-events-none ${activeCard === index ? 'opacity-100 animate-pulse-slow' : 'opacity-0 group-hover:opacity-100 group-active:opacity-100'}`} />
 
                             {/* Accent Line */}
-                            <div className="absolute top-0 left-0 w-1 h-0 bg-brand-red transition-all duration-300 group-hover:h-full z-10" />
+                            <div className={`absolute top-0 left-0 w-1 bg-brand-red transition-all duration-300 z-10 ${activeCard === index ? 'h-full' : 'h-0 group-hover:h-full group-active:h-full'}`} />
                             
                             {/* Content */}
                             <div className="relative z-10">
                                 <div className="mb-6 flex justify-between items-start">
-                                    <div className="p-3 bg-white/5 rounded-lg text-gray-400 group-hover:text-white group-hover:bg-brand-red transition-all duration-300">
+                                    <div className={`p-3 bg-white/5 rounded-lg text-gray-400 transition-all duration-300 ${activeCard === index ? 'text-white bg-brand-red' : 'group-hover:text-white group-hover:bg-brand-red group-active:text-white group-active:bg-brand-red'}`}>
                                         <feature.icon className="w-6 h-6" />
                                     </div>
                                     <span className="font-display font-bold text-2xl text-white/10 group-hover:text-brand-red/40 transition-colors">
@@ -87,10 +90,10 @@ const FeaturesSection: React.FC = () => {
                                     </span>
                                 </div>
                                 
-                                <h3 className="font-display font-bold text-xl uppercase tracking-wider text-white mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                                <h3 className={`font-display font-bold text-xl uppercase tracking-wider text-white mb-3 transition-transform duration-300 ${activeCard === index ? 'translate-x-2' : 'group-hover:translate-x-2 group-active:translate-x-2'}`}>
                                     {feature.title}
                                 </h3>
-                                <p className="text-sm text-gray-500 font-normal leading-relaxed group-hover:text-gray-300 transition-colors">
+                                <p className={`text-sm font-normal leading-relaxed transition-colors ${activeCard === index ? 'text-gray-300' : 'text-gray-500 group-hover:text-gray-300 group-active:text-gray-300'}`}>
                                     {feature.desc}
                                 </p>
                             </div>

@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
                 <img
                   src={logo.src}
                   alt="X1 Fitness"
-                  className="w-9 h-9 object-contain transition-transform duration-500 group-hover:scale-105"
+                  className="w-24 h-24 object-contain transition-transform duration-500 group-hover:scale-105"
                   loading="eager"
                   decoding="async"
                 />
