@@ -54,14 +54,14 @@ const Navbar: React.FC = () => {
                 <img
                   src={logo.src}
                   alt="X1 Fitness"
-                  className="w-24 h-24 object-contain transition-transform duration-500 group-hover:scale-105"
+                  className="w-12 h-12 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain transition-transform duration-500 group-hover:scale-105"
                   loading="eager"
                   decoding="async"
                 />
                 {/* Replaced blur with simple opacity glow */}
                 <div className="absolute inset-0 bg-brand-red opacity-0 group-hover:opacity-40 rounded-full transition-opacity duration-300"></div>
             </div>
-            <span className="text-2xl font-navbar font-bold tracking-wide italic">
+            <span className="text-lg md:text-2xl font-navbar font-bold tracking-wide italic">
               <span className="text-brand-red">X1</span>
               <span className="text-white">Fitness</span>
             </span>
