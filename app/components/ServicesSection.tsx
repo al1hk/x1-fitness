@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Dumbbell, Users, Laptop, Trophy, ArrowUpRight } from 'lucide-react';
 import Image from './Image';
 
@@ -96,12 +97,20 @@ const ServiceCard: React.FC<{
   );
 };
 
-const ServiceRow: React.FC<{ service: typeof services[0]; showEngage?: boolean }> = ({
+const ServiceRow: React.FC<{
+  service: typeof services[0];
+  showEngage?: boolean;
+  onClick?: () => void;
+}> = ({
   service,
   showEngage = true,
+  onClick,
 }) => {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 hover:border-brand-red/50 transition-colors cursor-pointer active:bg-white/5 active:scale-[0.995] transition-transform">
+    <div
+      onClick={onClick}
+      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 hover:border-brand-red/50 transition-colors cursor-pointer active:bg-white/5 active:scale-[0.995] transition-transform"
+    >
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(230,0,0,0.18),transparent_55%)]"></div>
       </div>
@@ -158,6 +167,7 @@ type ServicesSectionProps = {
 const ServicesSection: React.FC<ServicesSectionProps> = ({ variant = 'landing' }) => {
   const isServicesVariant = variant === 'services';
   const [activeServiceId, setActiveServiceId] = useState<number | null>(null);
+  const router = useRouter();
 
   return (
     <section
@@ -237,7 +247,12 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ variant = 'landing' }
         {isServicesVariant ? (
           <div className="space-y-6">
             {services.map((service) => (
-              <ServiceRow key={service.id} service={service} showEngage={false} />
+              <ServiceRow
+                key={service.id}
+                service={service}
+                showEngage={false}
+                onClick={() => router.push('/contact')}
+              />
             ))}
           </div>
         ) : (

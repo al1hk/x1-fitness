@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative w-full h-[100svh] bg-brand-dark isolate overflow-hidden mt-5"
+      className="relative w-full h-[100svh] bg-brand-dark isolate overflow-hidden mt-10"
     >
       {/* ================= BACKGROUND MARQUEE ================= */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none">
@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
         {/* ---------- HEADLINE ---------- */}
         <motion.div
           style={{ y: headlineY, opacity: fadeOut }}
-          className="col-span-2 text-center mt-[16vh] md:mt-[12vh]"
+          className="col-span-2 text-center mt-[10vh]"
         >
           <h1 className="font-display uppercase font-bold text-[18vw] md:text-[14vw] leading-[0.85] tracking-tighter">
             <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
           </h1>
         </motion.div>
 
-        {/* ---------- HERO IMAGE ---------- */}
+    {/* ---------- HERO IMAGE ---------- */}
         <motion.div 
         style={{ y: imageY }}
         className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
@@ -132,14 +132,7 @@ const Hero: React.FC = () => {
 
         </div>
 
-        {/* ---------- SCROLL INDICATOR ---------- */}
-        <div className="col-span-2 flex flex-col items-center mb-6 opacity-60">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
-            Scroll
-          </span>
-          <ChevronDown className="w-4 h-4 text-brand-red animate-bounce" />
-          <div className="w-[1px] h-10 bg-gradient-to-b from-brand-red to-transparent mt-2" />
-        </div>
+        
       </div>
     </section>
   );
