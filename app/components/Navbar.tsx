@@ -61,10 +61,7 @@ const Navbar: React.FC = () => {
                 {/* Replaced blur with simple opacity glow */}
                 <div className="absolute inset-0 bg-brand-red opacity-0 group-hover:opacity-40 rounded-full transition-opacity duration-300"></div>
             </div>
-            <span className="text-lg md:text-2xl font-navbar font-bold tracking-wide italic">
-              <span className="text-brand-red">X1</span>
-              <span className="text-white">Fitness</span>
-            </span>
+            
           </Link>
 
           {/* Desktop Links - Centered */}
