@@ -21,7 +21,11 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={ref}
+<<<<<<< HEAD
       className="relative w-full h-[100svh] bg-brand-dark isolate overflow-hidden mt-10"
+=======
+      className="relative w-full h-[100svh] bg-brand-dark isolate overflow-hidden mt-5"
+>>>>>>> 2c1c8611dc7199aaf1208b6f2d823c313fcbc563
     >
       {/* ================= BACKGROUND MARQUEE ================= */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none">
@@ -62,19 +66,30 @@ const Hero: React.FC = () => {
         {/* ---------- HEADLINE ---------- */}
         <motion.div
           style={{ y: headlineY, opacity: fadeOut }}
+<<<<<<< HEAD
           className="col-span-2 text-center mt-[10vh]"
         >
           <h1 className="font-display uppercase font-bold text-[18vw] md:text-[14vw] leading-[0.85] tracking-tighter">
             <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
               Redefine
             </span>
+=======
+          className="col-span-2 text-center mt-[16vh] md:mt-[12vh]"
+        >
+          <h1 className="font-display uppercase font-bold text-[18vw] md:text-[14vw] leading-[0.85] tracking-tighter">
+           <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-2xl"> Redefine </span>
+>>>>>>> 2c1c8611dc7199aaf1208b6f2d823c313fcbc563
             <span className="block text-brand-red drop-shadow-[0_0_30px_rgba(230,0,0,0.6)]">
               Your Limits
             </span>
           </h1>
         </motion.div>
 
+<<<<<<< HEAD
     {/* ---------- HERO IMAGE ---------- */}
+=======
+        {/* ---------- HERO IMAGE ---------- */}
+>>>>>>> 2c1c8611dc7199aaf1208b6f2d823c313fcbc563
         <motion.div 
         style={{ y: imageY }}
         className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
@@ -132,7 +147,18 @@ const Hero: React.FC = () => {
 
         </div>
 
+<<<<<<< HEAD
         
+=======
+        {/* ---------- SCROLL INDICATOR ---------- */}
+        <div className="col-span-2 flex flex-col items-center mb-6 opacity-60">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
+            Scroll
+          </span>
+          <ChevronDown className="w-4 h-4 text-brand-red animate-bounce" />
+          <div className="w-[1px] h-10 bg-gradient-to-b from-brand-red to-transparent mt-2" />
+        </div>
+>>>>>>> 2c1c8611dc7199aaf1208b6f2d823c313fcbc563
       </div>
     </section>
   );
