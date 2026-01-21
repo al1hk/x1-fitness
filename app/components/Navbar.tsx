@@ -42,8 +42,8 @@ const Navbar: React.FC = () => {
       <nav 
         className={`fixed top-0 left-0 w-full z-50 px-6 md:px-12 transition-all duration-500 border-b will-change-transform ${
           isScrolled || isMobileMenuOpen
-            ? 'py-4 bg-[#050505]/95 border-white/10 shadow-lg' 
-            : 'py-8 bg-transparent border-transparent'
+            ? 'py-2 md:py-2 bg-[#050505]/95 border-white/10 shadow-lg' 
+            : 'py-4 md:py-4 bg-transparent border-transparent'
         }`}
       >
         <div className="flex items-center justify-between max-w-[1600px] mx-auto">
@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
                 <img
                   src={logo.src}
                   alt="X1 Fitness"
-                  className="w-12 h-12 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain transition-transform duration-500 group-hover:scale-105"
+                  className="w-14 h-14 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain transition-transform duration-500 group-hover:scale-105"
                   loading="eager"
                   decoding="async"
                 />
