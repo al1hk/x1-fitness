@@ -65,14 +65,13 @@ const ContactFooter: React.FC = () => {
                         <img
                             src={logo.src}
                             alt="X1 Fitness"
-                            className="w-24 h-24 object-contain"
+                            className="w-28 h-28 md:w-32 md:h-32 object-contain"
                             loading="eager"
                             decoding="async"
                         />
                                             </div>
                     <span className="text-2xl font-display font-bold tracking-wide italic">
-                    <span className="text-brand-red">X1</span>
-                    <span className="text-white">Fitness</span>
+                    
                     </span>
                 </div>
                 <p className="font-sans text-gray-400 text-sm max-w-xs leading-relaxed font-medium">
@@ -150,7 +149,7 @@ const ContactFooter: React.FC = () => {
         {/* Copyright */}
         <div className="text-center mt-20 pt-8 border-t border-white/5">
             <p className="text-gray-600 text-xs uppercase tracking-widest">
-                © 2024 X1FITNESS. All rights reserved. Built for Greatness.
+                © 2026 X1FITNESS. All rights reserved. Built for Greatness.
             </p>
         </div>
       </div>

@@ -1,78 +1,83 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { Clock, Flame, Activity, Dumbbell, ChevronDown } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import FloatingCard from './FloatingCard';
-import heroImage from '../../assets/heroimage.png';
+import React, { useRef } from "react";
+import { Clock, Flame, Activity, Dumbbell, ChevronDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import FloatingCard from "./FloatingCard";
+import heroImage from "../../assets/heroimage.png";
 
 const Hero: React.FC = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
 
-  // Parallax transformations
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
+  const headlineY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const marqueeY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-
+  const fadeOut = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section 
-      ref={ref} 
-      className="relative w-full h-[100svh] overflow-visible flex flex-col items-center justify-center bg-brand-dark isolate"
+    <section
+      ref={ref}
+      className="relative w-full h-[100svh] bg-brand-dark isolate overflow-hidden mt-5"
     >
-      
-      {/* 1. Background Layer: Marquee Text */}
-      <motion.div 
-        style={{ y: marqueeY }}
-        className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 select-none overflow-hidden"
-      >
-        <div className="absolute w-full rotate-[-8deg] scale-[1.3] md:scale-150 transform-gpu">
-            <div className="flex whitespace-nowrap animate-marquee-slow will-change-transform">
-                {[1, 2].map((i) => (
-                    <span key={i} className="text-[20vw] font-display font-black uppercase italic text-outline-red px-8 md:px-12 leading-none">
-                        Titan • Strength • Power • Legacy •
-                    </span>
-                ))}
-            </div>
-            <div className="flex whitespace-nowrap animate-marquee-reverse-slow -mt-4 md:-mt-8 will-change-transform">
-                {[1, 2].map((i) => (
-                    <span key={i} className="text-[20vw] font-display font-black uppercase italic text-stroke-white px-8 md:px-12 leading-none">
-                        Relentless • Grit • Obsession •
-                    </span>
-                ))}
-            </div>
-        </div>
-      </motion.div>
+      {/* ================= BACKGROUND MARQUEE ================= */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none">
+        <div className="rotate-[-8deg] scale-[1.3] md:scale-150">
+          <div className="flex whitespace-nowrap animate-marquee-slow">
+            {[1, 2].map((i) => (
+              <span
+                key={i}
+                className="text-[20vw] font-display uppercase italic text-outline-red px-12 leading-none"
+              >
+                Titan • Strength • Power • Legacy •
+              </span>
+            ))}
+          </div>
 
-      {/* 2. Visual Layer: Glows & Vignette */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140vw] h-[140vw] bg-[radial-gradient(circle,rgba(230,0,0,0.12)_0%,transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/40"></div>
+          <div className="flex whitespace-nowrap animate-marquee-reverse-slow -mt-8">
+            {[1, 2].map((i) => (
+              <span
+                key={i}
+                className="text-[20vw] font-display uppercase italic text-stroke-white px-12 leading-none"
+              >
+                Relentless • Grit • Obsession •
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* 3. Mid-Layer: The Main Headline */}
-      <motion.div 
-        style={{ y: textY, opacity }}
-        className="absolute top-[8%] md:top-[14%] w-full flex flex-col items-center z-10 pointer-events-auto select-none px-4 will-change-transform"
-      >
-        <h1 className="font-display font-bold uppercase text-[18vw] md:text-[15vw] leading-[0.85] tracking-tighter text-center cursor-default w-full">
-          <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-2xl">
-            Redefine
-          </span>
-          <span className="block text-brand-red drop-shadow-[0_0_30px_rgba(230,0,0,0.6)]">
-            Your Limits
-          </span>
-        </h1>
-      </motion.div>
-      {/* 4. Foreground Layer: Character Image */}
-      <motion.div 
+      {/* ================= GRADIENT + VIGNETTE ================= */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/50" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(230,0,0,0.12)_0%,transparent_60%)]" />
+      </div>
+
+      {/* ================= MAIN GRID LAYOUT ================= */}
+      <div className="relative z-20 grid grid-cols-2 grid-rows-[auto_1fr_auto] h-full max-w-7xl mx-auto px-4">
+        
+        {/* ---------- HEADLINE ---------- */}
+        <motion.div
+          style={{ y: headlineY, opacity: fadeOut }}
+          className="col-span-2 text-center mt-[16vh] md:mt-[12vh]"
+        >
+          <h1 className="font-display uppercase font-bold text-[18vw] md:text-[14vw] leading-[0.85] tracking-tighter">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
+              Redefine
+            </span>
+            <span className="block text-brand-red drop-shadow-[0_0_30px_rgba(230,0,0,0.6)]">
+              Your Limits
+            </span>
+          </h1>
+        </motion.div>
+
+        {/* ---------- HERO IMAGE ---------- */}
+        <motion.div 
         style={{ y: imageY }}
-        className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform"
+        className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
       >
         <img 
           src={heroImage.src}
@@ -90,68 +95,51 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-brand-red/5 mix-blend-color pointer-events-none"></div>
       </motion.div>
 
-      {/* 5. UI Layer: Floating Info Cards - Optimized for Mobile Overlap */}
-      <motion.div 
-        style={{ y: imageY }}
-        className="absolute inset-0 z-50 w-full h-full max-w-[1600px] mx-auto pointer-events-none isolate"
-      >
-        <div
-          className="relative w-full h-full"
-          style={{ transform: 'translateZ(0)', WebkitTransform: 'translateZ(0)' }}
-        >
-          {/* TOP LEFT */}
-          <div className="absolute top-[25%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[8%] lg:left-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left">
-            <div className="animate-float-slow will-change-transform">
-              <FloatingCard 
-                  icon={<Clock className="w-5 h-5" />} 
-                  label="Accessibility" 
-                  value="OPEN 24/7" 
-              />
-            </div>
+        {/* ---------- GRID CARDS (iOS SAFE) ---------- */}
+        <div className="absolute inset-0 z-30 grid grid-cols-2 grid-rows-2 pointer-events-none px-4">
+          
+          <div className="flex items-start justify-start pt-[30vh]">
+            <FloatingCard
+              icon={<Clock className="w-5 h-5" />}
+              label="Accessibility"
+              value="OPEN 24/7"
+            />
           </div>
 
-          {/* BOTTOM LEFT - Pushed further left/bottom to avoid character */}
-          <div className="absolute bottom-[30%] left-[max(0.5rem,env(safe-area-inset-left))] md:left-[5%] lg:left-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-left">
-            <div className="animate-float-delayed will-change-transform">
-              <FloatingCard 
-                  icon={<Flame className="w-5 h-5" />} 
-                  label="Avg Session" 
-                  value="950 KCAL" 
-              />
-            </div>
+          <div className="flex items-start justify-end pt-[30vh]">
+            <FloatingCard
+              icon={<Activity className="w-5 h-5" />}
+              label="Intensity"
+              value="ELITE"
+            />
           </div>
 
-          {/* TOP RIGHT */}
-          <div className="absolute top-[25%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[8%] lg:right-[12%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right">
-            <div className="animate-float-reverse will-change-transform">
-              <FloatingCard 
-                  icon={<Activity className="w-5 h-5" />} 
-                  label="Intensity" 
-                  value="ELITE" 
-              />
-            </div>
+          <div className="flex items-end justify-start pb-[20vh]">
+            <FloatingCard
+              icon={<Flame className="w-5 h-5" />}
+              label="Avg Session"
+              value="950 KCAL"
+            />
           </div>
 
-          {/* BOTTOM RIGHT - Pushed further right/bottom to avoid character */}
-          <div className="absolute bottom-[30%] right-[max(0.5rem,env(safe-area-inset-right))] md:right-[5%] lg:right-[10%] z-[60] transform scale-90 sm:scale-95 md:scale-100 origin-right">
-            <div className="animate-float-slow will-change-transform">
-              <FloatingCard 
-                  icon={<Dumbbell className="w-5 h-5" />} 
-                  label="Equipment" 
-                  value="HAMMER STRENGTH" 
-              />
-            </div>
+          <div className="flex items-end justify-end pb-[20vh]">
+            <FloatingCard
+              icon={<Dumbbell className="w-5 h-5" />}
+              label="Equipment"
+              value="TITANIUM "
+            />
           </div>
+
         </div>
-      </motion.div>
 
-      {/* Bottom Scroll Indicator */}
-      <div className="absolute bottom-6 md:bottom-10 z-50 flex flex-col items-center gap-2 pointer-events-none opacity-60">
-        <div className="flex flex-col items-center text-white/20 gap-1 animate-bounce">
-            <span className="text-[8px] md:text-[10px] uppercase font-bold tracking-[0.3em]">Scroll</span>
-            <ChevronDown className="w-4 h-4 text-brand-red" />
+        {/* ---------- SCROLL INDICATOR ---------- */}
+        <div className="col-span-2 flex flex-col items-center mb-6 opacity-60">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
+            Scroll
+          </span>
+          <ChevronDown className="w-4 h-4 text-brand-red animate-bounce" />
+          <div className="w-[1px] h-10 bg-gradient-to-b from-brand-red to-transparent mt-2" />
         </div>
-        <div className="w-[1px] h-6 md:h-12 bg-gradient-to-b from-brand-red to-transparent"></div>
       </div>
     </section>
   );
