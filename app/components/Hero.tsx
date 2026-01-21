@@ -65,9 +65,7 @@ const Hero: React.FC = () => {
           className="col-span-2 text-center mt-[16vh] md:mt-[12vh]"
         >
           <h1 className="font-display uppercase font-bold text-[18vw] md:text-[14vw] leading-[0.85] tracking-tighter">
-            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
-              Redefine
-            </span>
+           <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-2xl"> Redefine </span>
             <span className="block text-brand-red drop-shadow-[0_0_30px_rgba(230,0,0,0.6)]">
               Your Limits
             </span>
