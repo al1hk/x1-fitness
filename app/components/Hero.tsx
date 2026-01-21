@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative w-full h-[100svh] bg-brand-dark isolate overflow-hidden"
+      className="relative w-full h-[100svh] bg-brand-dark isolate overflow-hidden mt-5"
     >
       {/* ================= BACKGROUND MARQUEE ================= */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none">
@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
         {/* ---------- HEADLINE ---------- */}
         <motion.div
           style={{ y: headlineY, opacity: fadeOut }}
-          className="col-span-2 text-center mt-[10vh]"
+          className="col-span-2 text-center mt-[16vh] md:mt-[12vh]"
         >
           <h1 className="font-display uppercase font-bold text-[18vw] md:text-[14vw] leading-[0.85] tracking-tighter">
             <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
@@ -75,28 +75,30 @@ const Hero: React.FC = () => {
         </motion.div>
 
         {/* ---------- HERO IMAGE ---------- */}
-        <motion.div
-          style={{ y: imageY }}
-          className="col-span-2 flex items-end justify-center pointer-events-none"
-        >
-          <img
-            src={heroImage.src}
-            alt="Elite Athlete"
-            className="h-[70vh] md:h-[85vh] object-contain object-bottom"
-            style={{
-              filter: "grayscale(100%) contrast(1.1) brightness(0.9)",
-              WebkitMaskImage:
-                "linear-gradient(to bottom, black 80%, transparent 100%)",
-              maskImage:
-                "linear-gradient(to bottom, black 80%, transparent 100%)",
-            }}
-          />
-        </motion.div>
+        <motion.div 
+        style={{ y: imageY }}
+        className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
+      >
+        <img 
+          src={heroImage.src}
+          alt="Elite Athlete"
+          loading="eager"
+          decoding="async"
+          className="h-full w-auto object-contain object-bottom"
+          style={{
+            filter: 'grayscale(100%) contrast(1.1) brightness(0.9)',
+            maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+          }}
+          
+        />
+        <div className="absolute inset-0 bg-brand-red/5 mix-blend-color pointer-events-none"></div>
+      </motion.div>
 
         {/* ---------- GRID CARDS (iOS SAFE) ---------- */}
         <div className="absolute inset-0 z-30 grid grid-cols-2 grid-rows-2 pointer-events-none px-4">
           
-          <div className="flex items-start justify-start pt-[20vh]">
+          <div className="flex items-start justify-start pt-[30vh]">
             <FloatingCard
               icon={<Clock className="w-5 h-5" />}
               label="Accessibility"
@@ -104,7 +106,7 @@ const Hero: React.FC = () => {
             />
           </div>
 
-          <div className="flex items-start justify-end pt-[20vh]">
+          <div className="flex items-start justify-end pt-[30vh]">
             <FloatingCard
               icon={<Activity className="w-5 h-5" />}
               label="Intensity"
@@ -124,7 +126,7 @@ const Hero: React.FC = () => {
             <FloatingCard
               icon={<Dumbbell className="w-5 h-5" />}
               label="Equipment"
-              value="HAMMER STRENGTH"
+              value="TITANIUM "
             />
           </div>
 
